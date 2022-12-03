@@ -1,0 +1,6 @@
+require('rone.set')
+require('rone.remap')
+require('rone.packer')
+require('rone.tree')
+require('rone.treesitter')
+require('rone.statusline')
