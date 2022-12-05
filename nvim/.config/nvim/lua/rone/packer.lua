@@ -1,3 +1,28 @@
+local fn = vim.fn
+
+-- Automatically install packer
+local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+if fn.empty(fn.glob(install_path)) > 0 then
+  PACKER_BOOTSTRAP = fn.system {
+    "git",
+    "clone",
+    "--depth",
+    "1",
+    "https://github.com/wbthomason/packer.nvim",
+    install_path,
+  }
+  print "Installing packer close and reopen Neovim..."
+  vim.cmd [[packadd packer.nvim]]
+end
+
+-- Autocommand that reloads neovim whenever you save the plugins.lua file
+vim.cmd [[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost packer.lua source <afile> | PackerSync
+  augroup end
+]]
+
 return require("packer").startup(function(use)
     use("wbthomason/packer.nvim")
     use("folke/tokyonight.nvim")
@@ -8,6 +33,8 @@ return require("packer").startup(function(use)
             'nvim-tree/nvim-web-devicons', -- optional, for file icons
         }
     })
+
+    --code highlighting
     use({
         'nvim-treesitter/nvim-treesitter',
         run = function()
@@ -16,14 +43,30 @@ return require("packer").startup(function(use)
         end
     })
     use("p00f/nvim-ts-rainbow")
+
+    --status bar
     use({
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     })
+
+    --search
     use({
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
         requires = { {'nvim-lua/plenary.nvim'} }
     })
+
+    -- cmp plugins
+    use("hrsh7th/nvim-cmp") -- The completion plugin
+    use("hrsh7th/cmp-buffer") -- buffer completions
+    use("hrsh7th/cmp-path") -- path completions
+    use("hrsh7th/cmp-cmdline") -- cmdline completions
+    use("saadparwaiz1/cmp_luasnip") -- snippet completions
+
+    -- snippets
+    use("L3MON4D3/LuaSnip") --snippet engine
+    use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
+
 end)
 
 
