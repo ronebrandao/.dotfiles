@@ -50,6 +50,12 @@ return require("packer").startup(function(use)
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     })
 
+    --lsp
+    use "neovim/nvim-lspconfig" -- enable LSP
+    use "williamboman/mason.nvim" -- simple to use language server installer
+    use "williamboman/mason-lspconfig.nvim" -- simple to use language server installer 
+    use("jose-elias-alvarez/null-ls.nvim")
+
     --search
     use({
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
@@ -62,6 +68,7 @@ return require("packer").startup(function(use)
     use("hrsh7th/cmp-path") -- path completions
     use("hrsh7th/cmp-cmdline") -- cmdline completions
     use("saadparwaiz1/cmp_luasnip") -- snippet completions
+    use("hrsh7th/cmp-nvim-lsp")
 
     -- snippets
     use("L3MON4D3/LuaSnip") --snippet engine
