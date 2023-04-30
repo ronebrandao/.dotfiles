@@ -42,7 +42,7 @@ return require("packer").startup(function(use)
             ts_update()
         end
     })
-    use("p00f/nvim-ts-rainbow")
+    use("mrjones2014/nvim-ts-rainbow")
 
     --status bar
     use({
