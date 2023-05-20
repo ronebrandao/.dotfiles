@@ -4,9 +4,9 @@ local M = {}
 M.setup = function()
     local signs = {
         { name = "DiagnosticSignError", text = "" },
-        { name = "DiagnosticSignWarn", text = "" },
-        { name = "DiagnosticSignHint", text = "" },
-        { name = "DiagnosticSignInfo", text = "" },
+        { name = "DiagnosticSignWarn",  text = "" },
+        { name = "DiagnosticSignHint",  text = "" },
+        { name = "DiagnosticSignInfo",  text = "" },
     }
 
     for _, sign in ipairs(signs) do
@@ -14,8 +14,7 @@ M.setup = function()
     end
 
     local config = {
-        -- disable virtual text
-        virtual_text = false,
+        virtual_text = true,
         -- show signs
         signs = {
             active = signs,
@@ -54,7 +53,7 @@ local function lsp_highlight_document(client)
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
       augroup END
-    ]]       ,
+    ]],
             false
         )
     end
@@ -81,7 +80,7 @@ local function lsp_keymaps(bufnr)
     )
     vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
---    vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format()' ]]
+    --    vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format()' ]]
     vim.cmd [[ autocmd BufWritePre * lua vim.lsp.buf.format() ]]
 end
 

@@ -19,8 +19,8 @@ map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")
 
 --Tab navigation
-map("n", "<leader>1", "1gt")
-map("n", "<leader>2", "2gt")
-map("n", "<leader>3", "3gt")
-map("n", "<leader>4", "4gt")
-map("n", "<leader>5", "5gt")
+--map("n", "<leader>1", "1gt")
+--map("n", "<leader>2", "2gt")
+--map("n", "<leader>3", "3gt")
+--map("n", "<leader>4", "4gt")
+--map("n", "<leader>5", "5gt")

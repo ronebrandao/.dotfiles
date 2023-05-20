@@ -3,16 +3,16 @@ local fn = vim.fn
 -- Automatically install packer
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system {
-    "git",
-    "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path,
-  }
-  print "Installing packer close and reopen Neovim..."
-  vim.cmd [[packadd packer.nvim]]
+    PACKER_BOOTSTRAP = fn.system {
+        "git",
+        "clone",
+        "--depth",
+        "1",
+        "https://github.com/wbthomason/packer.nvim",
+        install_path,
+    }
+    print "Installing packer close and reopen Neovim..."
+    vim.cmd [[packadd packer.nvim]]
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
@@ -34,6 +34,18 @@ return require("packer").startup(function(use)
         }
     })
 
+    use({
+        "folke/trouble.nvim",
+        config = function()
+            require("trouble").setup {
+                icons = false,
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
+    })
+
     --code highlighting
     use({
         'nvim-treesitter/nvim-treesitter',
@@ -51,29 +63,29 @@ return require("packer").startup(function(use)
     })
 
     --lsp
-    use "neovim/nvim-lspconfig" -- enable LSP
-    use "williamboman/mason.nvim" -- simple to use language server installer
-    use "williamboman/mason-lspconfig.nvim" -- simple to use language server installer 
+    use "neovim/nvim-lspconfig"             -- enable LSP
+    use "williamboman/mason.nvim"           -- simple to use language server installer
+    use "williamboman/mason-lspconfig.nvim" -- simple to use language server installer
     use("jose-elias-alvarez/null-ls.nvim")
 
     --search
     use({
-        'nvim-telescope/telescope.nvim', tag = '0.1.0',
-        requires = { {'nvim-lua/plenary.nvim'} }
+        'nvim-telescope/telescope.nvim',
+        tag = '0.1.0',
+        requires = { { 'nvim-lua/plenary.nvim' } }
     })
 
     -- cmp plugins
-    use("hrsh7th/nvim-cmp") -- The completion plugin
-    use("hrsh7th/cmp-buffer") -- buffer completions
-    use("hrsh7th/cmp-path") -- path completions
-    use("hrsh7th/cmp-cmdline") -- cmdline completions
+    use("hrsh7th/nvim-cmp")         -- The completion plugin
+    use("hrsh7th/cmp-buffer")       -- buffer completions
+    use("hrsh7th/cmp-path")         -- path completions
+    use("hrsh7th/cmp-cmdline")      -- cmdline completions
     use("saadparwaiz1/cmp_luasnip") -- snippet completions
     use("hrsh7th/cmp-nvim-lsp")
 
     -- snippets
-    use("L3MON4D3/LuaSnip") --snippet engine
+    use("L3MON4D3/LuaSnip")             --snippet engine
     use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
+    use('theprimeagen/harpoon')
 end)
-
-
