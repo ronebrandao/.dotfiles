@@ -54,7 +54,6 @@ return require("packer").startup(function(use)
             ts_update()
         end
     })
-    use("mrjones2014/nvim-ts-rainbow")
 
     --status bar
     use({
@@ -62,30 +61,40 @@ return require("packer").startup(function(use)
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     })
 
-    --lsp
-    use "neovim/nvim-lspconfig"             -- enable LSP
-    use "williamboman/mason.nvim"           -- simple to use language server installer
-    use "williamboman/mason-lspconfig.nvim" -- simple to use language server installer
-    use("jose-elias-alvarez/null-ls.nvim")
+    --formatting
+    use("stevearc/conform.nvim")
 
     --search
     use({
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.0',
+        tag = '0.1.6',
         requires = { { 'nvim-lua/plenary.nvim' } }
     })
 
-    -- cmp plugins
-    use("hrsh7th/nvim-cmp")         -- The completion plugin
-    use("hrsh7th/cmp-buffer")       -- buffer completions
-    use("hrsh7th/cmp-path")         -- path completions
-    use("hrsh7th/cmp-cmdline")      -- cmdline completions
-    use("saadparwaiz1/cmp_luasnip") -- snippet completions
-    use("hrsh7th/cmp-nvim-lsp")
 
-    -- snippets
-    use("L3MON4D3/LuaSnip")             --snippet engine
-    use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
+    use {
+        'VonHeikemen/lsp-zero.nvim',
+        branch = 'v1.x',
+        requires = {
+            -- LSP Support
+            { 'neovim/nvim-lspconfig' },
+            { 'williamboman/mason.nvim' },
+            { 'williamboman/mason-lspconfig.nvim' },
+
+            -- Autocompletion
+            { 'hrsh7th/nvim-cmp' },
+            { 'hrsh7th/cmp-buffer' },
+            { 'hrsh7th/cmp-path' },
+            { 'saadparwaiz1/cmp_luasnip' },
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'hrsh7th/cmp-nvim-lua' },
+
+            -- Snippets
+            { 'L3MON4D3/LuaSnip' },
+            { 'rafamadriz/friendly-snippets' },
+        }
+    }
+
 
     use('theprimeagen/harpoon')
 end)
